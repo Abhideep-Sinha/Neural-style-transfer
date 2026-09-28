@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# PyTorch checkpoints
+*.pth
+*.pt
+
+# Generated experiment files
+NST_Code/experiment/run2/
+
+# Generated/uploaded images
+NST_Code/static/uploads/
+
+NST_Code/style_data
+NST_Code/content_data
+
+# macOS
+.DS_Store
