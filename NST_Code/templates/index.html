@@ -523,7 +523,7 @@
                     <div class="card-body text-center">
                         <div class="preview-image mb-3" id="contentPreview">
                             {% if content_image %}
-                                <img src="{{ content_image }}" alt="Content Image">
+                                <img src="{{ url_for('send_image', filename=content_image) }}" alt="Content Image">
                             {% else %}
                                 <span>Select Content Image</span>
                             {% endif %}
@@ -540,7 +540,7 @@
                     <div class="card-body text-center">
                         <div class="preview-image mb-3" id="stylePreview">
                             {% if style_image %}
-                                <img src="{{ style_image }}" alt="Style Image">
+                                <img src="{{ url_for('send_image', filename=style_image) }}" alt="Style Image">
                             {% else %}
                                 <span>Select Style Image</span>
                             {% endif %}
@@ -574,12 +574,10 @@
             <div class="card border-success">
                 <div class="card-header bg-success text-white fw-bold text-center py-3" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">Stylized Result</div>
                 <div class="card-body p-0">
-                    <img src="{{ result_image }}" class="img-fluid w-100" alt="Stylized Image" style="border-radius: 0 0 20px 20px;">
+                    <img src="{{ url_for('send_image', filename=result_image) }}" class="img-fluid w-100" alt="Stylized Image" style="border-radius: 0 0 20px 20px;">
                 </div>
                 <div class="card-footer text-center" style="background: transparent; border-top: none; padding-bottom: 20px;">
-                    <a href="{{ result_image }}" download="stylized_result.png" class="btn btn-outline-light mt-2">
-    Download Result
-</a>
+                    <a href="{{ url_for('send_image', filename=result_image) }}" download class="btn btn-outline-light mt-2">Download Result</a>
                 </div>
             </div>
         </div>
@@ -772,24 +770,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const uploadForm = document.getElementById('uploadForm');
-    const submitButton = uploadForm.querySelector('[type="submit"]');
-    const loader = document.getElementById('loader');
-    let isSubmitting = false;
-
-    uploadForm.addEventListener('submit', function (event) {
-        if (isSubmitting) {
-            event.preventDefault();
-            return;
-        }
-
-        isSubmitting = true;
-        submitButton.disabled = true;
-        submitButton.value = 'Generating...';
-        submitButton.setAttribute('aria-busy', 'true');
-        loader.classList.add('active');
-    });
-
     function previewFile(input, previewId) {
         const preview = document.getElementById(previewId);
         const file = input.files[0];
