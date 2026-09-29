@@ -38,9 +38,23 @@ elif torch.cuda.is_available():
 else:
     device = torch.device("cpu")
 
-encoder = VGGEncoder('vgg_normalised.pth').to(device)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+vgg_path = os.path.join(BASE_DIR, 'vgg_normalised.pth')
+decoder_path = os.path.join(
+    BASE_DIR,
+    'experiment',
+    'run2',
+    'decoder_10.pth'
+)
+
+encoder = VGGEncoder(vgg_path).to(device)
+
 decoder = Decoder().to(device)
-decoder.load_state_dict(torch.load('/Users/abhideepsinha/ai-nst/ai-nst-project/NST_Code/experiment/run2/decoder_10.pth'))
+
+decoder.load_state_dict(
+    torch.load(decoder_path, map_location=device)
+)
 
 encoder.eval()
 decoder.eval()
@@ -148,8 +162,4 @@ def send_example(filename):
 
 
 if __name__ == '__main__':
-    app.run(
-        host='127.0.0.1',
-        port=5000,
-        debug=True
-    )
+    app.run(debug=True)

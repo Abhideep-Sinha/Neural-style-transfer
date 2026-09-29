@@ -11,6 +11,8 @@ venv/
 *.pth
 *.pt
 
+!NST_Code/vgg_normalised.pth
+
 # Generated experiment files
 NST_Code/experiment/run2/
 
